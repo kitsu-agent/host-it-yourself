@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1440" />
+  <title>Getting Started — Host It Yourself</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page">
+
+    <!-- ================= HEADER (detail: shorter, dark green) ================= -->
+    <header class="site-header detail">
+      <div class="header-inner">
+        <a class="logo" href="index.html" aria-label="Host It Yourself — home">
+          <svg width="34" height="34" viewBox="0 0 42 42" fill="none" aria-hidden="true">
+            <rect x="6" y="20" width="30" height="16" rx="3" stroke="#F2F2F2" stroke-width="2.5"/>
+            <rect x="11" y="10" width="20" height="10" rx="2.5" stroke="#F2F2F2" stroke-width="2.5"/>
+            <circle cx="13" cy="30" r="1.8" fill="#BCC9A7"/>
+            <circle cx="19.5" cy="30" r="1.8" fill="#BCC9A7"/>
+          </svg>
+        </a>
+        <nav class="nav" aria-label="Primary">
+          <a href="meet-immich.html">Meet Immich</a>
+          <a href="requirements.html">Requirements</a>
+          <a href="getting-started.html" class="active" aria-current="page">Getting Started</a>
+          <a href="keep-them-safe.html">Keep Them Safe</a>
+          <a class="btn btn-contact" href="contact.html">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- ================= HERO ================= -->
+    <section class="detail-hero">
+      <div class="detail-hero-inner">
+        <div class="detail-hero-text">
+          <h1>Get it running</h1>
+          <p>This is the whole setup, start to finish — set aside an afternoon. Six short steps: install Docker, grab Immich's files, point them at your storage, start it, create your account, then connect your phone. By tonight your photos can be backing up to a server you own. (Picked your hardware yet? Everything about <a href="requirements.html"><u>what to run</u></a> lives on the Requirements page.)</p>
+        </div>
+        <div class="detail-hero-media">
+          <img src="images/gs-01-step-flow.png" alt="Five numbered steps connected in a row: download, configure, start, open, connect a phone." />
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= BODY: sticky Content + main ================= -->
+    <section class="detail-body">
+      <div class="detail-body-inner">
+
+        <aside class="toc" aria-label="On this page">
+          <p class="toc-title">Content</p>
+          <ul>
+            <li><a href="#step1">1. Install Docker</a></li>
+            <li><a href="#step2">2. Download the files</a></li>
+            <li><a href="#step3">3. Set your storage</a></li>
+            <li><a href="#step4">4. Start it</a></li>
+            <li><a href="#step5">5. Make your account</a></li>
+            <li><a href="#step6">6. Connect your phone</a></li>
+          </ul>
+        </aside>
+
+        <div class="content">
+          <section id="step1">
+            <h2>Step 1 — Install Docker</h2>
+            <p>Immich runs inside containers, so Docker comes first. On most Linux machines, the official convenience script is one line:</p>
+            <pre><code>curl -fsSL https://get.docker.com | sh</code></pre>
+            <figure class="figure">
+              <img src="images/gs-02-containers.png" alt="A stack of container boxes running on top of a server." />
+              <figcaption>Immich ships as containers that run together.</figcaption>
+            </figure>
+          </section>
+
+          <section id="step2">
+            <h2>Step 2 — Download Immich's two files</h2>
+            <p>Make a folder to keep everything tidy, then pull the setup files from Immich's latest release:</p>
+            <pre><code>mkdir immich-app &amp;&amp; cd immich-app
+wget -O docker-compose.yml https://github.com/immich-app/immich/releases/latest/download/docker-compose.yml
+wget -O .env https://github.com/immich-app/immich/releases/latest/download/example.env</code></pre>
+          </section>
+
+          <section id="step3">
+            <h2>Step 3 — Tell it where your photos live</h2>
+            <p>Open the <code>.env</code> file and set three values:</p>
+            <ul style="margin:0 0 20px 22px;">
+              <li><strong>UPLOAD_LOCATION</strong> — the folder where your photos should be stored (point it at your big drive).</li>
+              <li><strong>DB_PASSWORD</strong> — any password, letters and numbers only.</li>
+              <li><strong>TZ</strong> — your timezone, e.g. <code>Europe/Amsterdam</code>.</li>
+            </ul>
+            <p>That's the only configuration you have to touch.</p>
+          </section>
+
+          <section id="step4">
+            <h2>Step 4 — Start it</h2>
+            <p>From the same folder:</p>
+            <pre><code>docker compose up -d</code></pre>
+            <p>The first run downloads its images — give it a minute or two.</p>
+          </section>
+
+          <section id="step5">
+            <h2>Step 5 — Open it and make your account</h2>
+            <p>In your browser, go to <code>http://YOUR-SERVER-IP:2283</code> and create your admin account. That's your photo cloud, live.</p>
+          </section>
+
+          <section id="step6">
+            <h2>Step 6 — Connect your phone</h2>
+            <p>Install the <strong>Immich</strong> app from the App Store or Play Store, enter your server's address, sign in, and turn on <strong>backup</strong>. Your camera roll starts uploading in the background.</p>
+            <figure class="figure">
+              <img src="images/gs-03-connect-phone.png" alt="A phone logging in to a home server, with photos syncing back to the phone." />
+              <figcaption>Point the app at your server and switch on backup.</figcaption>
+            </figure>
+          </section>
+
+          <div class="callout">
+            <p><strong>Want to go deeper?</strong> This page is the short version on purpose. The full guide — every option, every setting, and troubleshooting — lives in the repo: <a href="https://github.com/immich-app/immich"><u>github.com/immich-app/immich</u></a> and the docs at <a href="https://immich.app/docs"><u>immich.app/docs</u></a>.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= CLOSING CTA ================= -->
+    <section class="cta-band">
+      <div class="cta-band-inner">
+        <div>
+          <h2>Photos are in — now don't lose them.</h2>
+          <p>A running server is only half the story; here's how to keep those photos safe when a disk eventually fails.</p>
+        </div>
+        <a class="btn btn-primary" href="keep-them-safe.html">Keep them safe →</a>
+      </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <a class="logo" href="index.html" aria-label="Host It Yourself — home">
+          <svg width="34" height="34" viewBox="0 0 42 42" fill="none" aria-hidden="true">
+            <rect x="6" y="20" width="30" height="16" rx="3" stroke="#F2F2F2" stroke-width="2.5"/>
+            <rect x="11" y="10" width="20" height="10" rx="2.5" stroke="#F2F2F2" stroke-width="2.5"/>
+            <circle cx="13" cy="30" r="1.8" fill="#BCC9A7"/>
+            <circle cx="19.5" cy="30" r="1.8" fill="#BCC9A7"/>
+          </svg>
+        </a>
+        <p class="small footer-copy">Max Swart 2026</p>
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>

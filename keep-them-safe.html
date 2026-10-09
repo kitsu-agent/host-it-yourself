@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1440" />
+  <title>Keep Them Safe — Host It Yourself</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page">
+
+    <!-- ================= HEADER (detail: shorter, dark green) ================= -->
+    <header class="site-header detail">
+      <div class="header-inner">
+        <a class="logo" href="index.html" aria-label="Host It Yourself — home">
+          <svg width="34" height="34" viewBox="0 0 42 42" fill="none" aria-hidden="true">
+            <rect x="6" y="20" width="30" height="16" rx="3" stroke="#F2F2F2" stroke-width="2.5"/>
+            <rect x="11" y="10" width="20" height="10" rx="2.5" stroke="#F2F2F2" stroke-width="2.5"/>
+            <circle cx="13" cy="30" r="1.8" fill="#BCC9A7"/>
+            <circle cx="19.5" cy="30" r="1.8" fill="#BCC9A7"/>
+          </svg>
+        </a>
+        <nav class="nav" aria-label="Primary">
+          <a href="meet-immich.html">Meet Immich</a>
+          <a href="requirements.html">Requirements</a>
+          <a href="getting-started.html">Getting Started</a>
+          <a href="keep-them-safe.html" class="active" aria-current="page">Keep Them Safe</a>
+          <a class="btn btn-contact" href="contact.html">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- ================= HERO ================= -->
+    <section class="detail-hero">
+      <div class="detail-hero-inner">
+        <div class="detail-hero-text">
+          <h1>Keep them safe</h1>
+          <p>Two things are true at once. Your photos are now safer than they've ever been — they're yours, on your hardware, not rented from a company that can change the rules. And your new server is one failed drive away from taking all of them with it, unless you plan for it. This is the part most beginner guides skip, so let's do it properly.</p>
+        </div>
+        <div class="detail-hero-media">
+          <img src="images/ks-01-321-rule.png" alt="Three identical photo archives in a row, labelled 3, 2 and 1." />
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= BODY: sticky Content + main ================= -->
+    <section class="detail-body">
+      <div class="detail-body-inner">
+
+        <aside class="toc" aria-label="On this page">
+          <p class="toc-title">Content</p>
+          <ul>
+            <li><a href="#rule">The 3-2-1 rule</a></li>
+            <li><a href="#what">What to back up</a></li>
+            <li><a href="#automate">Automate it</a></li>
+            <li><a href="#test">Test your backup</a></li>
+          </ul>
+        </aside>
+
+        <div class="content">
+          <section id="rule">
+            <h2>The rule that does all the work: 3-2-1</h2>
+            <p>Almost everything you need to know fits in three numbers. Keep <strong>3</strong> copies of your photos, on <strong>2</strong> different kinds of storage, with <strong>1</strong> copy somewhere off-site. In practice that means: the originals on your server, a second copy on an external drive you plug in now and then, and a third copy that lives somewhere else entirely — a cloud service, or a friend's house. Any single failure — a dead disk, a spilled drink, a burglary, a house fire — can only ever take out one of the three. That's the whole idea, and it's the difference between "annoying" and "unrecoverable".</p>
+          </section>
+
+          <section id="what">
+            <h2>What "your photos" actually means in Immich</h2>
+            <p>Here's the bit that trips people up. Immich stores your library in two separate places, and you need <strong>both</strong>: the photo and video files themselves (in your upload location), and the database, which holds all the <em>metadata</em> — which file is which, your albums, your faces, your edits. Back up only the files and you'll restore a messy pile of images with no albums and no names. Back up only the database and you'll restore an index pointing at photos that aren't there. The good news: Immich already backs up its database automatically — daily by default, keeping the last 14 — and you can change that in the admin settings. Just remember those database dumps hold metadata only, never the photos themselves.</p>
+            <figure class="figure">
+              <img src="images/ks-02-backup-flow.png" alt="A home server copying its photos out to an external hard drive and to a cloud." />
+              <figcaption>One copy at home, one off-site.</figcaption>
+            </figure>
+          </section>
+
+          <section id="automate">
+            <h2>Automate it, so it's not a chore</h2>
+            <p>The only backups that survive are the ones you don't have to remember. Set up one scheduled job — a nightly script or a sync tool — that copies both the files and a fresh database dump to your external drive, and a second that pushes a copy off-site. Immich's own docs include a ready-made backup script you can run on a timer, so you're not writing anything from scratch. Set it once, check it once a month, and forget about it. The goal is a backup that happens whether or not you're thinking about it.</p>
+          </section>
+
+          <section id="test">
+            <h2>Test it — and know what a backup isn't</h2>
+            <p>Two honest rules to close on. First, <strong>RAID is not a backup</strong>: mirroring two drives protects you from one disk dying, but not from deleting a folder, a power surge, or theft — it's one copy, not three. Second, <strong>a backup you've never restored isn't a backup yet</strong> — it's a hope. Once, on a quiet afternoon, practise restoring from your backup onto a spare machine. If your photos and albums come back, you're safe for real. If they don't, you found out now instead of on the worst day.</p>
+            <figure class="figure">
+              <img src="images/ks-03-protected-drive.png" alt="A hard drive held inside a shield, with photo prints safe around it." />
+              <figcaption>Your photos, protected — whatever happens to the hardware.</figcaption>
+            </figure>
+          </section>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= CLOSING CTA ================= -->
+    <section class="cta-band">
+      <div class="cta-band-inner">
+        <div>
+          <h2>That's it — you're covered.</h2>
+          <p>Your photos will outlive the drive, the server, and probably this website. Still stuck, or want a second opinion on your setup? Come ask.</p>
+        </div>
+        <a class="btn btn-primary" href="contact.html">Ask a question →</a>
+      </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <a class="logo" href="index.html" aria-label="Host It Yourself — home">
+          <svg width="34" height="34" viewBox="0 0 42 42" fill="none" aria-hidden="true">
+            <rect x="6" y="20" width="30" height="16" rx="3" stroke="#F2F2F2" stroke-width="2.5"/>
+            <rect x="11" y="10" width="20" height="10" rx="2.5" stroke="#F2F2F2" stroke-width="2.5"/>
+            <circle cx="13" cy="30" r="1.8" fill="#BCC9A7"/>
+            <circle cx="19.5" cy="30" r="1.8" fill="#BCC9A7"/>
+          </svg>
+        </a>
+        <p class="small footer-copy">Max Swart 2026</p>
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>

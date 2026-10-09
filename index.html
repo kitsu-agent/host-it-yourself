@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1440" />
+  <title>Host It Yourself — Home</title>
+
+  <!-- Header font: Prompt • Body font: Roboto Serif -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page">
+
+    <!-- ================= HEADER ================= -->
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="logo" href="index.html" aria-label="Host It Yourself — home">
+          <!-- PLACEHOLDER mark — swap for your real logo (SVG) -->
+          <svg width="42" height="42" viewBox="0 0 42 42" fill="none" aria-hidden="true">
+            <rect x="6" y="20" width="30" height="16" rx="3" stroke="#F2F2F2" stroke-width="2.5"/>
+            <rect x="11" y="10" width="20" height="10" rx="2.5" stroke="#F2F2F2" stroke-width="2.5"/>
+            <circle cx="13" cy="30" r="1.8" fill="#BCC9A7"/>
+            <circle cx="19.5" cy="30" r="1.8" fill="#BCC9A7"/>
+          </svg>
+        </a>
+
+        <nav class="nav" aria-label="Primary">
+          <a href="meet-immich.html">Meet Immich</a>
+          <a href="requirements.html">Requirements</a>
+          <a href="getting-started.html">Getting Started</a>
+          <a href="keep-them-safe.html">Keep Them Safe</a>
+          <a class="btn btn-contact" href="contact.html">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- ================= HERO ================= -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <h1>Host It Yourself</h1>
+          <p class="hero-lead">Ever wondered how cloud services work or wanted to escape big tech? Let me introduce you to self-hosting. Learn how it works and have your own Google Photos up and running by today!</p>
+          <a class="btn btn-primary" href="requirements.html">My own Google Photos?</a>
+        </div>
+        <div class="hero-media">
+          <img src="images/home-01-hero.png" alt="A cosy house with a glowing home server at its centre, photo thumbnails orbiting around it." />
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 1. WHY QUIT GOOGLE PHOTOS ================= -->
+    <section class="section section-light">
+      <div class="section-inner two-col">
+        <div class="col-text">
+          <h2>Why quit Google Photos?</h2>
+          <p>Your photos are the most personal thing you own — and right now they live on someone else's computer. Google Photos is convenient; that's the whole trick. But you're renting, and the rent only goes up: the free 15&nbsp;GB fills fast, then it's a monthly bill that never ends. Your library gets scanned, indexed and used to build a profile of you. And the rules can change whenever a company decides they should. Your memories shouldn't work like a subscription.</p>
+        </div>
+        <div class="col-media">
+          <img src="images/home-03-escape.png" alt="A padlocked grey cloud with a price tag, photos flowing away from it to a home server." />
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 2. WHAT IF THEY LIVED AT HOME ================= -->
+    <section class="section section-dark">
+      <div class="section-inner">
+        <h2>What if they lived at home instead?</h2>
+        <p class="large">That's self-hosting — running software on a computer you own instead of renting someone else's. For photos, the one app to know is <strong>Immich</strong>: free, open source, and genuinely good. It looks and feels like the gallery app you already use — automatic phone backup, a timeline, smart search, albums, sharing — except the library stays with you, private by default, because there's nobody else in the loop.</p>
+      </div>
+    </section>
+
+    <!-- ================= 3. DON'T FEAR THE HARD PART ================= -->
+    <section class="section section-light">
+      <div class="section-inner">
+        <h2>Don't fear the hard part</h2>
+        <p class="large">You don't need expensive gear, a computer science degree, or a rack humming in a basement. A spare computer, a cheap drive and an afternoon are enough to start. This site takes you the whole way: what it takes, what Immich can actually do, how to install it, and how to make sure you never lose a single photo. It's a weekend project with a lifetime payoff.</p>
+      </div>
+    </section>
+
+    <!-- ================= TRUST STRIP ================= -->
+    <div class="trust-strip">
+      <div class="trust-inner">
+        <span>Free and open source</span>
+        <span class="dot" aria-hidden="true">•</span>
+        <span>Runs on a computer you already own</span>
+        <span class="dot" aria-hidden="true">•</span>
+        <span>Your photos never leave your house</span>
+      </div>
+    </div>
+
+    <!-- ================= THE JOURNEY CARDS ================= -->
+    <section class="section section-bg">
+      <div class="section-inner">
+        <h2 class="center">Ready? Here's the path</h2>
+        <div class="journey" tabindex="0" aria-label="Scrollable page links">
+          <a class="card" href="requirements.html">
+            <h3>Requirements</h3>
+            <p class="card-q">"What do I need?"</p>
+            <p class="small">Can your hardware handle it? The honest checklist.</p>
+            <span class="card-link">Read more →</span>
+          </a>
+          <a class="card" href="meet-immich.html">
+            <h3>Meet Immich</h3>
+            <p class="card-q">"What does it do?"</p>
+            <p class="small">Your own Google Photos, feature by feature.</p>
+            <span class="card-link">Read more →</span>
+          </a>
+          <a class="card" href="getting-started.html">
+            <h3>Getting Started</h3>
+            <p class="card-q">"How do I get it running?"</p>
+            <p class="small">Six steps, start to finish.</p>
+            <span class="card-link">Read more →</span>
+          </a>
+          <a class="card" href="keep-them-safe.html">
+            <h3>Keep Them Safe</h3>
+            <p class="card-q">"What if the disk dies?"</p>
+            <p class="small">Backups, so nothing's ever lost.</p>
+            <span class="card-link">Read more →</span>
+          </a>
+          <a class="card" href="contact.html">
+            <h3>Contact</h3>
+            <p class="card-q">"Got a question?"</p>
+            <p class="small">Ask anything.</p>
+            <span class="card-link">Read more →</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <a class="logo" href="index.html" aria-label="Host It Yourself — home">
+          <svg width="34" height="34" viewBox="0 0 42 42" fill="none" aria-hidden="true">
+            <rect x="6" y="20" width="30" height="16" rx="3" stroke="#F2F2F2" stroke-width="2.5"/>
+            <rect x="11" y="10" width="20" height="10" rx="2.5" stroke="#F2F2F2" stroke-width="2.5"/>
+            <circle cx="13" cy="30" r="1.8" fill="#BCC9A7"/>
+            <circle cx="19.5" cy="30" r="1.8" fill="#BCC9A7"/>
+          </svg>
+        </a>
+        <p class="small footer-copy">Max Swart 2026</p>
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>
