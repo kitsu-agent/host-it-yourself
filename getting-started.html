@@ -39,10 +39,10 @@
       <div class="detail-hero-inner">
         <div class="detail-hero-text">
           <h1>Get it running</h1>
-          <p>This is the whole setup, start to finish — set aside an afternoon. Six short steps: install Docker, grab Immich's files, point them at your storage, start it, create your account, then connect your phone. By tonight your photos can be backing up to a server you own. (Picked your hardware yet? Everything about <a href="requirements.html"><u>what to run</u></a> lives on the Requirements page.)</p>
+          <p>Six steps from an ordinary computer to your own photo cloud. We start by wiping it clean and putting Linux on it — that's the honest recommendation, and the one the rest of this guide assumes — then install Docker, drop in Immich's files, start it, and make it reachable from outside your house. (Still choosing a machine? Everything about <a href="requirements.html"><u>what to run</u></a> lives on the Requirements page.)</p>
         </div>
         <div class="detail-hero-media">
-          <img src="images/gs-01-step-flow.png" alt="Five numbered steps connected in a row: download, configure, start, open, connect a phone." />
+          <img src="images/gs-01-step-flow.png" alt="Six numbered steps in a row, each with an icon: Linux, containers, files, play, a globe, and a smiley face." />
         </div>
       </div>
     </section>
@@ -54,19 +54,31 @@
         <aside class="toc" aria-label="On this page">
           <p class="toc-title">Content</p>
           <ul>
-            <li><a href="#step1">1. Install Docker</a></li>
-            <li><a href="#step2">2. Download the files</a></li>
-            <li><a href="#step3">3. Set your storage</a></li>
-            <li><a href="#step4">4. Start it</a></li>
-            <li><a href="#step5">5. Make your account</a></li>
-            <li><a href="#step6">6. Connect your phone</a></li>
+            <li><a href="#step1">1. Install WSL or Linux</a></li>
+            <li><a href="#step2">2. Install Docker</a></li>
+            <li><a href="#step3">3. Downloading and configure the files</a></li>
+            <li><a href="#step4">4. Start it and log in</a></li>
+            <li><a href="#step5">5. Port-forward, reverse proxy or Tailscale</a></li>
+            <li><a href="#step6">6. Have fun!</a></li>
           </ul>
         </aside>
 
         <div class="content">
+
           <section id="step1">
-            <h2>Step 1 — Install Docker</h2>
-            <p>Immich runs inside containers, so Docker comes first. On most Linux machines, the official convenience script is one line:</p>
+            <h2>Step 1 — Install WSL or Linux</h2>
+            <p>Immich runs on Linux, so before anything else we need a Linux system. There are two ways to get one, and it's worth being honest about which is better.</p>
+            <p><strong>The recommended path: wipe the machine and install Linux.</strong> A system wipe is always a good idea when you're turning a computer into a server. You start from a clean slate instead of inheriting years of clutter, leftover apps and background processes — and, more importantly, <strong>Linux runs better</strong>. It has far less overhead, Docker runs natively on it, and it's exactly the environment Immich's own documentation is written for. For a machine that's going to sit there running 24/7, a fresh install of Ubuntu Server or Debian is the best foundation you can give it. Back up anything you care about first.</p>
+            <p><strong>The other path: WSL.</strong> If you'd rather not wipe — say it's your only computer, or you still need Windows day to day — then <strong>WSL is possible as well</strong>. WSL2 runs a real Linux kernel inside Windows, so Immich and Docker work on it perfectly well. The trade-offs are small but real: it's a layer running on top of Windows rather than the real thing, so it's a touch slower and heavier, and a few things — opening ports to the outside world, and starting automatically when the machine boots — need extra configuring. It works; it just takes more fiddling.</p>
+            <div class="callout">
+              <p><strong>Our advice:</strong> if the computer is going to be a dedicated server, wipe it and install Linux — it'll be simpler and faster from here on. If it has to stay a Windows machine, WSL2 is a perfectly good home for Immich.</p>
+            </div>
+            <p>Once Linux is up, note its IP address (run <code>ip a</code>, or check your router) — you'll need it in Step 4.</p>
+          </section>
+
+          <section id="step2">
+            <h2>Step 2 — Install Docker</h2>
+            <p>Immich runs inside containers, so Docker comes next. On Linux — and inside your WSL terminal, which behaves the same way — the official script is one line:</p>
             <pre><code>curl -fsSL https://get.docker.com | sh</code></pre>
             <figure class="figure">
               <img src="images/gs-02-containers.png" alt="A stack of container boxes running on top of a server." />
@@ -74,16 +86,12 @@
             </figure>
           </section>
 
-          <section id="step2">
-            <h2>Step 2 — Download Immich's two files</h2>
-            <p>Make a folder to keep everything tidy, then pull the setup files from Immich's latest release:</p>
+          <section id="step3">
+            <h2>Step 3 — Downloading and configure the files</h2>
+            <p>Make a folder to keep everything tidy, then pull Immich's setup files from its latest release:</p>
             <pre><code>mkdir immich-app &amp;&amp; cd immich-app
 wget -O docker-compose.yml https://github.com/immich-app/immich/releases/latest/download/docker-compose.yml
 wget -O .env https://github.com/immich-app/immich/releases/latest/download/example.env</code></pre>
-          </section>
-
-          <section id="step3">
-            <h2>Step 3 — Tell it where your photos live</h2>
             <p>Open the <code>.env</code> file and set three values:</p>
             <ul style="margin:0 0 20px 22px;">
               <li><strong>UPLOAD_LOCATION</strong> — the folder where your photos should be stored (point it at your big drive).</li>
@@ -94,29 +102,34 @@ wget -O .env https://github.com/immich-app/immich/releases/latest/download/examp
           </section>
 
           <section id="step4">
-            <h2>Step 4 — Start it</h2>
-            <p>From the same folder:</p>
+            <h2>Step 4 — Start it and log in</h2>
+            <p>From the same folder, bring it up:</p>
             <pre><code>docker compose up -d</code></pre>
-            <p>The first run downloads its images — give it a minute or two.</p>
+            <p>The first run downloads its images — give it a minute or two. Then open your browser and go to <code>http://YOUR-SERVER-IP:2283</code>, and create your admin account. That's your photo cloud, live.</p>
           </section>
 
           <section id="step5">
-            <h2>Step 5 — Open it and make your account</h2>
-            <p>In your browser, go to <code>http://YOUR-SERVER-IP:2283</code> and create your admin account. That's your photo cloud, live.</p>
-          </section>
-
-          <section id="step6">
-            <h2>Step 6 — Connect your phone</h2>
-            <p>Install the <strong>Immich</strong> app from the App Store or Play Store, enter your server's address, sign in, and turn on <strong>backup</strong>. Your camera roll starts uploading in the background.</p>
+            <h2>Step 5 — Port-forward, reverse proxy or Tailscale</h2>
+            <p>Right now Immich only answers on your own network — you can reach it from home, but not from anywhere else, and the phone app won't sync until you fix that. There are three ways to open it up, in rough order of how much work they take:</p>
+            <ul style="margin:0 0 20px 22px;">
+              <li><strong>Port forwarding</strong> — the quickest: tell your router to send a port straight to your server. Simple, but it exposes the server directly to the internet, so you really want HTTPS in front of it.</li>
+              <li><strong>Reverse proxy</strong> — the "proper" way: put a proxy such as Caddy or Nginx in front to handle HTTPS and a real domain name. More setup, but tidy and secure, and it plays nicely with other services later.</li>
+              <li><strong>Tailscale</strong> — the easiest and safest: install it on the server and on your phone and laptop, and they join one private network. Nothing is exposed to the internet and no ports are opened. For most people, this is the one to pick.</li>
+            </ul>
             <figure class="figure">
-              <img src="images/gs-03-connect-phone.png" alt="A phone logging in to a home server, with photos syncing back to the phone." />
-              <figcaption>Point the app at your server and switch on backup.</figcaption>
+              <img src="images/gs-03-remote-access.png" alt="A phone and a laptop connecting through dotted lines to a shielded home server inside a house." />
+              <figcaption>One of these three gets your server within reach — anywhere.</figcaption>
             </figure>
           </section>
 
-          <div class="callout">
-            <p><strong>Want to go deeper?</strong> This page is the short version on purpose. The full guide — every option, every setting, and troubleshooting — lives in the repo: <a href="https://github.com/immich-app/immich"><u>github.com/immich-app/immich</u></a> and the docs at <a href="https://immich.app/docs"><u>immich.app/docs</u></a>.</p>
-          </div>
+          <section id="step6">
+            <h2>Step 6 — Have fun!</h2>
+            <p>That's the hard part done. Install the <strong>Immich</strong> app on your phone, point it at your server, switch on <strong>backup</strong> — and then just go take some photos. They'll upload themselves in the background, and your library is yours from now on. If something does break, the docs and the community have seen it before, so it's rarely more than a search away.</p>
+            <div class="callout">
+              <p><strong>Want to go deeper?</strong> This page is the short version on purpose. The full guide — every option, every setting, and troubleshooting — lives in the repo: <a href="https://github.com/immich-app/immich"><u>github.com/immich-app/immich</u></a> and the docs at <a href="https://immich.app/docs"><u>immich.app/docs</u></a>.</p>
+            </div>
+          </section>
+
         </div>
 
       </div>
