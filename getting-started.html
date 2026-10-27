@@ -58,7 +58,7 @@
             <li><a href="#step2">2. Install Docker</a></li>
             <li><a href="#step3">3. Downloading and configure the files</a></li>
             <li><a href="#step4">4. Start it and log in</a></li>
-            <li><a href="#step5">5. Tailscale or a reverse proxy</a></li>
+            <li><a href="#step5">5. Tailscale, a reverse proxy or Cloudflare</a></li>
             <li><a href="#step6">6. Have fun!</a></li>
           </ul>
         </aside>
@@ -109,12 +109,12 @@ wget -O .env https://github.com/immich-app/immich/releases/latest/download/examp
           </section>
 
           <section id="step5">
-            <h2>Step 5 — Tailscale or a reverse proxy</h2>
-            <p>Right now Immich only answers on your own network — you can reach it from home, but not from anywhere else, and the phone app won't sync until you fix that. Two routes get you out, and the first one is by far the least work.</p>
+            <h2>Step 5 — Tailscale, a reverse proxy or Cloudflare</h2>
+            <p>Right now Immich only answers on your own network — you can reach it from home, but not from anywhere else, and the phone app won't sync until you fix that. There are three routes out, and the first one is by far the least work. Pick one; you don't need all three.</p>
             <ul style="margin:0 0 20px 22px;">
               <li><strong>Tailscale — start here.</strong> The easiest option by a distance. Install Tailscale on the server and on your phone and laptop, sign in to the same account on all of them, and they join one private network. Your server gets a stable address that works from anywhere — on the train, at a friend's house — while nothing is exposed to the internet and no ports are opened on your router. For most people this is the whole answer, and it takes about five minutes.</li>
-              <li><strong>A reverse proxy: Caddy or Nginx.</strong> The "proper" way if you want a real domain name and proper HTTPS. You put a proxy in front of Immich and it handles the certificate and forwards traffic inward. <strong>Caddy</strong> is the beginner-friendly one — it gets HTTPS certificates automatically with almost no configuration. <strong>Nginx</strong> gives you more control and more knobs, which also means more to configure. Either way you keep ownership of everything, but you do need to forward ports 80 and 443 on your router so the internet can reach the proxy.</li>
-              <li><strong>Cloudflare.</strong> Two flavours, same idea. You can put Cloudflare in front of your Caddy or Nginx setup as DNS and proxy, adding caching and a layer of protection. Or skip the open ports entirely with a <strong>Cloudflare Tunnel</strong>: a small agent on your server makes an outbound connection to Cloudflare's edge, which then serves your site over HTTPS on your domain — nothing inbound is exposed. The trade-off is that your traffic passes through Cloudflare, so it's worth adding Cloudflare Access if you want a login wall in front of it too.</li>
+              <li><strong>A reverse proxy: Caddy or Nginx.</strong> The "proper" way if you want a real domain name and proper HTTPS, and you want to run the whole thing yourself. You put a proxy in front of Immich and it handles the certificate and forwards traffic inward. <strong>Caddy</strong> is the beginner-friendly one — it gets HTTPS certificates automatically with almost no configuration. <strong>Nginx</strong> gives you more control and more knobs, which also means more to configure. Either way you keep ownership of everything, but you do need to forward ports 80 and 443 on your router so the internet can reach the proxy.</li>
+              <li><strong>Cloudflare Tunnel.</strong> Here you don't need a local reverse proxy at all — the tunnel <em>is</em> the reverse proxy. You run a small agent called <code>cloudflared</code> on the server, and it holds an outbound connection to Cloudflare's edge. Cloudflare then terminates HTTPS on your domain and forwards the traffic down that already-open connection to Immich on your machine. Nothing on your side listens to the internet, so no ports are opened and no Caddy or Nginx sits in the middle — Cloudflare does the proxying, the certificate and the DNS for you. The trade-off is that your traffic does pass through Cloudflare, so it's worth putting Cloudflare Access in front of it as a login wall.</li>
             </ul>
             <figure class="figure">
               <img src="images/gs-03-remote-access.png" alt="A phone and a laptop connecting through dotted lines to a shielded home server inside a house." />
